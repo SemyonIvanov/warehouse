@@ -6,12 +6,12 @@ import { AddNewCard, Card, ListWrapper } from './styledComponents';
 
 interface CardListProps {
   list: { id: number; name: string }[];
-  addNewEl: Dispatch<SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CardList: FC<CardListProps> = ({ list, addNewEl }) => (
+export const CardList: FC<CardListProps> = ({ list, setOpen }) => (
   <ListWrapper>
-    <Card onClick={() => addNewEl(true)}>
+    <Card onClick={() => setOpen(true)}>
       <H3>Добавить новый</H3>
       <AddNewCard />
     </Card>
