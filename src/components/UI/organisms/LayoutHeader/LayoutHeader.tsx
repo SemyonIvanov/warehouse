@@ -4,14 +4,19 @@ import { ReactComponent as ProfileIcon } from 'src/assets/Profile.svg';
 
 import { Text } from 'src/components/UI/atoms/typography/styledComponents';
 
+import { routes } from 'src/constants/routes';
+
 import { Header, Logo, NavigationMenu, NavItem, ProfileWrapper } from './styledComponents';
 
 export const LayoutHeader = () => (
   <Header>
     <Logo>WAREHOUSE</Logo>
     <NavigationMenu>
-      <NavLink to="/products">{({ isActive }) => <NavItem isActive={isActive}>Продукция</NavItem>}</NavLink>
-      <NavLink to="/warehouses">{({ isActive }) => <NavItem isActive={isActive}>Склады</NavItem>}</NavLink>
+      {routes.map(({ path, name }) => (
+        <NavLink key={path} to={path}>
+          {({ isActive }) => <NavItem isActive={isActive}>{name}</NavItem>}
+        </NavLink>
+      ))}
     </NavigationMenu>
     <ProfileWrapper>
       <ProfileIcon width="2rem" />

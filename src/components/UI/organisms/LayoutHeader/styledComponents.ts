@@ -41,7 +41,7 @@ export const NavItem = styled(Text)`
   border: 2px solid black;
   border-bottom: none;
   border-radius: 5px 5px 0 0;
-  background-color: ${({ isActive }: { isActive: boolean }) => (isActive ? 'white' : 'rgba(57,57,57,0.75)')};
+  background-color: ${({ isActive }: { isActive: boolean }) => (isActive ? 'white' : 'rgba(85,85,85)')};
   box-shadow: ${({ isActive }: { isActive: boolean }) => (isActive ? '1px -0.5px 2px 0.5px rgba(0,0,0,0.75)' : 'none')};
   z-index: 2;
   ::after {
