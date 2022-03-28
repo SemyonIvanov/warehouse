@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { GlobalStyles } from 'src/global';
 
@@ -9,7 +10,10 @@ export const App: FC = () => (
   <>
     <GlobalStyles />
     <Layout>
-      <MainPage />
+      <Routes>
+        <Route path="/products" element={<MainPage />} />
+        <Route path="/warehouses" element={<MainPage />} />
+      </Routes>
     </Layout>
   </>
 );

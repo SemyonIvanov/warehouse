@@ -10,8 +10,8 @@ export const LayoutHeader = () => (
   <Header>
     <Logo>WAREHOUSE</Logo>
     <NavigationMenu>
-      <NavLink to="products">{({ isActive }) => <NavItem isActive={isActive}>Продукция</NavItem>}</NavLink>
-      <NavLink to="warehouses">{({ isActive }) => <NavItem isActive={isActive}>Склады</NavItem>}</NavLink>
+      <NavLink to="/products">{({ isActive }) => <NavItem isActive={isActive}>Продукция</NavItem>}</NavLink>
+      <NavLink to="/warehouses">{({ isActive }) => <NavItem isActive={isActive}>Склады</NavItem>}</NavLink>
     </NavigationMenu>
     <ProfileWrapper>
       <ProfileIcon width="2rem" />
