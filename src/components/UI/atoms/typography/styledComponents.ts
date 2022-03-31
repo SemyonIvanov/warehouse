@@ -20,6 +20,10 @@ export const Text = styled.span`
   font-size: 1rem;
 `;
 
+export const MediumText = styled.span`
+  font-size: 1.5rem;
+`;
+
 export const LargeText = styled.span`
   font-size: 2rem;
 `;

@@ -5,8 +5,8 @@ import { mockWarehouses } from 'src/mockData';
 import { WarehousesPageWrapper } from 'src/components/pages/WarehousesPage/styledComponents';
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H2 } from 'src/components/UI/atoms/typography/styledComponents';
-import { ProductAddForm } from 'src/components/UI/molecules/ProductAddForm';
 import { CardList } from 'src/components/UI/organisms/CardList';
+import { ProductAddForm } from 'src/components/UI/organisms/ProductAddForm';
 
 export const WarehousesPage: FC = () => {
   const [warehouses, setWarehouses] = useState(mockWarehouses);

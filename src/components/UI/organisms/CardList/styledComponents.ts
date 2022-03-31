@@ -10,9 +10,10 @@ export const ListWrapper = styled.div`
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   border: 2px solid black;
-  border-radius: 10px;
+  border-radius: 35px;
   padding: 10px;
   cursor: pointer;
 
