@@ -3,7 +3,9 @@ import { Dispatch, FC, Fragment, SetStateAction } from 'react';
 import { Product } from 'src/@types/products';
 import { mockWarehouses } from 'src/mockData';
 
+import { Button } from 'src/components/UI/atoms/Button';
 import { Input } from 'src/components/UI/atoms/Input';
+import { MediumText, Text } from 'src/components/UI/atoms/typography/styledComponents';
 import { SelectWrapper } from 'src/components/UI/molecules/WarehouseDistribution/styledComponents';
 
 interface WarehouseDistributionProps {
@@ -13,11 +15,12 @@ interface WarehouseDistributionProps {
 
 export const WarehouseDistribution: FC<WarehouseDistributionProps> = ({ newProduct, setNewProduct }) => (
   <SelectWrapper>
-    <span>Распределение по складам</span>
     {+newProduct.amount ? (
       <>
+        <MediumText>Распределение по складам:</MediumText>
         {newProduct.warehouses.map((warehouse) => (
           <Fragment key={Math.random()}>
+            <Text>Выберете склад</Text>
             <select
               key={warehouse.id}
               value={warehouse.id}
@@ -46,17 +49,19 @@ export const WarehouseDistribution: FC<WarehouseDistributionProps> = ({ newProdu
                 </option>
               ))}
             </select>
-            <Input
-              label="Количество"
-              type="number"
-              initialValue={warehouse.amount}
-              setInitialValue={(value) =>
-                setNewProduct((prev) => ({
-                  ...prev,
-                  warehouses: prev.warehouses.map((el) => (el.id === warehouse.id ? { ...el, amount: value } : el)),
-                }))
-              }
-            />
+            {!!warehouse.name && (
+              <Input
+                label="Количество"
+                type="number"
+                initialValue={warehouse.amount}
+                setInitialValue={(value) =>
+                  setNewProduct((prev) => ({
+                    ...prev,
+                    warehouses: prev.warehouses.map((el) => (el.id === warehouse.id ? { ...el, amount: value } : el)),
+                  }))
+                }
+              />
+            )}
           </Fragment>
         ))}
         {!newProduct.warehouses.length && (
@@ -81,17 +86,15 @@ export const WarehouseDistribution: FC<WarehouseDistributionProps> = ({ newProdu
           </select>
         )}
         {!!newProduct.warehouses.length && (
-          <button
-            type="button"
+          <Button
+            text="добавить склад"
             onClick={() =>
               setNewProduct((prev) => ({
                 ...prev,
                 warehouses: [...prev.warehouses, { id: Math.random(), name: '', amount: '0' }],
               }))
             }
-          >
-            добавить склад
-          </button>
+          />
         )}
       </>
     ) : (
