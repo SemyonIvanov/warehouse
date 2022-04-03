@@ -7,25 +7,6 @@ export const ListWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-
-  :hover {
-    svg {
-      fill: black;
-    }
-  }
-
-  // TODO: временно
-  height: 400px;
-`;
-
 export const AddNewCard = styled(AddNew)`
   width: 256px;
   fill: gray;

@@ -3,8 +3,5 @@ import styled from 'styled-components';
 export const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-export const BtnAdd = styled.button`
-  cursor: pointer;
+  gap: 20px;
 `;

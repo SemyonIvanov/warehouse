@@ -17,6 +17,19 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;
     font-family: Roboto, sans-serif;
+    ::-webkit-scrollbar {
+      width: 4px;
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: black;
+      border-radius: 27px;
+    }
+    ::-webkit-scrollbar-track {
+      margin-top: 3px;
+      margin-bottom: 3px;
+    }
   }
 
   a {

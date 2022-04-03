@@ -17,7 +17,11 @@ export const SmallText = styled.span`
 `;
 
 export const Text = styled.span`
-  font-size: 1rem;
+  font-size: 1.2rem;
+`;
+
+export const MediumText = styled.span`
+  font-size: 1.5rem;
 `;
 
 export const LargeText = styled.span`

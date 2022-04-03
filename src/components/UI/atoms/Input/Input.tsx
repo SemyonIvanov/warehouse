@@ -1,19 +1,37 @@
 import { FC, useState } from 'react';
 
+import { TextField } from '@mui/material';
+
 interface InputProps {
-  type: string;
+  label?: string;
+  error?: string;
   initialValue: string;
   setInitialValue: (value: string) => void;
 }
 
-export const Input: FC<InputProps> = ({ type, initialValue, setInitialValue }) => {
+export const Input: FC<InputProps> = ({ label, error, initialValue, setInitialValue }) => {
   const [value, setValue] = useState(initialValue);
+  const [errorText, setErrorText] = useState(error);
+
   return (
-    <input
-      type={type}
+    <TextField
+      error={!!errorText}
+      helperText={errorText}
+      fullWidth
+      label={label}
       value={value}
-      onChange={({ target }) => setValue(target.value)}
-      onBlur={() => setInitialValue(value)}
+      onChange={({ target }) => {
+        setValue(target.value);
+      }}
+      onBlur={() => {
+        if (value) {
+          setInitialValue(value);
+          setErrorText('');
+        } else {
+          setErrorText(`Введите ${label}`);
+        }
+      }}
+      onKeyPress={(e) => e.key === 'Enter' && setInitialValue(value)}
     />
   );
 };

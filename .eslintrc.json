@@ -85,6 +85,7 @@
     "import/resolver": "off",
     "import/no-unresolved": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", ".tsx"] }],
+    "react/require-default-props": "off",
     "react/function-component-definition": [
       2,
       {
