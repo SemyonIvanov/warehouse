@@ -8,9 +8,10 @@ import { BtnClose, ModalAway, ModalWrapper } from 'src/components/UI/atoms/Modal
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  fullHeight?: boolean;
 }
 
-export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
+export const Modal: FC<ModalProps> = ({ isOpen, onClose, fullHeight, children }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -26,7 +27,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (isOpen) {
     return createPortal(
       <ModalAway>
-        <ModalWrapper>{children}</ModalWrapper>
+        <ModalWrapper fullHeight={fullHeight}>{children}</ModalWrapper>
         <BtnClose type="button" onClick={onClose}>
           <Close width="40px" fill="#fff" />
         </BtnClose>

@@ -1,46 +1,47 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Product } from 'src/@types/products';
+import { ReactComponent as ProductImg } from 'src/assets/ad_product_icon_155850.svg';
+
+import { RootState, setCurrentProduct, setIsOpenProductCardModal } from 'src/store';
 
 import { Modal } from 'src/components/UI/atoms/Modal';
-import { H3 } from 'src/components/UI/atoms/typography/styledComponents';
+import { H3, Text } from 'src/components/UI/atoms/typography/styledComponents';
 import { ProductCard } from 'src/components/UI/organisms/ProductCard';
 
 import { Card } from './styledComponents';
 
-interface CardListProps {
-  list: Product[];
-}
+export const ProductList: FC = () => {
+  const dispatch = useDispatch();
 
-export const ProductList: FC<CardListProps> = ({ list }) => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
-  const [selectProduct, setSelectProduct] = useState<Product | null>(null);
+  const products = useSelector((state: RootState) => state.reducer.products);
+  const isOpenProductCardModal = useSelector((state: RootState) => state.reducer.isOpenProductCardModal);
 
   return (
     <>
-      {list.map((el) => (
+      {products.map((product) => (
         <Card
-          key={el.id}
+          key={product.id}
           onClick={() => {
-            setSelectProduct(el);
-            setIsOpenModal(true);
+            dispatch(setCurrentProduct({ product }));
+            dispatch(setIsOpenProductCardModal(true));
           }}
         >
-          <H3>{el.name}</H3>
-          <el.picture width="300px" />
+          <H3>{product.name}</H3>
+          <ProductImg width="250px" />
+          <Text>{product.amount} шт</Text>
         </Card>
       ))}
-      {selectProduct && (
-        <Modal
-          isOpen={isOpenModal}
-          onClose={() => {
-            setSelectProduct(null);
-            setIsOpenModal(false);
-          }}
-        >
-          <ProductCard initProduct={selectProduct} />
-        </Modal>
-      )}
+      <Modal
+        fullHeight
+        isOpen={isOpenProductCardModal}
+        onClose={() => {
+          dispatch(setCurrentProduct({ product: null }));
+          dispatch(setIsOpenProductCardModal(false));
+        }}
+      >
+        <ProductCard />
+      </Modal>
     </>
   );
 };

@@ -1,6 +1,7 @@
-import { Dispatch, FC, SetStateAction, useMemo } from 'react';
+import { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Product } from 'src/@types/products';
+import { RootState, setCurrentProduct } from 'src/store';
 
 import { Input } from 'src/components/UI/atoms/Input';
 import { MediumText } from 'src/components/UI/atoms/typography/styledComponents';
@@ -8,42 +9,32 @@ import { WarehouseDistribution } from 'src/components/UI/molecules/WarehouseDist
 
 import { FormWrapper, UndistributedProduction } from './styledComponents';
 
-interface ProductEditFormProps {
-  product: Product;
-  setProduct: Dispatch<SetStateAction<Product>>;
-}
+export const ProductEditForm: FC = () => {
+  const dispatch = useDispatch();
 
-export const ProductEditForm: FC<ProductEditFormProps> = ({ product, setProduct }) => {
-  const undistributedProduction = useMemo(() => {
-    const distributedProduction = product.warehouses.reduce((acc, curr) => +curr.amount + acc, 0);
-    return +product.amount - distributedProduction;
-  }, [product]);
+  const currentProduct = useSelector((state: RootState) => state.reducer.currentProduct);
 
   return (
-    <FormWrapper>
-      <Input
-        label="Наименование"
-        type="text"
-        initialValue={product.name}
-        setInitialValue={(value) => setProduct((prev) => ({ ...prev, name: value }))}
-      />
-      <Input
-        label="Количество"
-        type="number"
-        initialValue={product.amount}
-        setInitialValue={(value) => setProduct((prev) => ({ ...prev, amount: value }))}
-      />
-      <WarehouseDistribution
-        product={product}
-        setProduct={setProduct}
-        undistributedProduction={undistributedProduction}
-      />
-      <MediumText>
-        Нераспределенная продукция:{' '}
-        <UndistributedProduction isNegative={undistributedProduction < 0}>
-          {undistributedProduction || 0}
-        </UndistributedProduction>
-      </MediumText>
-    </FormWrapper>
+    currentProduct && (
+      <FormWrapper>
+        <Input
+          label="Наименование"
+          initialValue={currentProduct.name}
+          setInitialValue={(value) => dispatch(setCurrentProduct({ product: { ...currentProduct, name: value } }))}
+        />
+        <Input
+          label="Количество"
+          initialValue={currentProduct.amount}
+          setInitialValue={(value) => dispatch(setCurrentProduct({ product: { ...currentProduct, amount: value } }))}
+        />
+        <WarehouseDistribution />
+        <MediumText>
+          Нераспределенная продукция:{' '}
+          <UndistributedProduction isNegative={currentProduct.undistributedProduction < 0}>
+            {currentProduct.undistributedProduction || 0}
+          </UndistributedProduction>
+        </MediumText>
+      </FormWrapper>
+    )
   );
 };
