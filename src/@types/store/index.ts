@@ -6,4 +6,6 @@ export type StoreType = {
   currentProduct: null | Product;
   isOpenProductCardModal: boolean;
   warehouses: Warehouses[];
+  currentWarehouse: Warehouses | null;
+  isOpenWarehouseCardModal: boolean;
 };

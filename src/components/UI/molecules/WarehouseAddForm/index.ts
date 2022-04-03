@@ -1,0 +1,1 @@
+export { WarehouseAddForm } from './WarehouseAddForm';

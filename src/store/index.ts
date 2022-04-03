@@ -29,4 +29,9 @@ export const {
   deleteCurrentProduct,
   setIsOpenProductCardModal,
   deleteFromAllWarehouses,
+  setIsOpenWarehouseCardModal,
+  setCurrentWarehouse,
+  addWarehouse,
+  editProduct,
+  redistributionProduct,
 } = warehouseSlice.actions;

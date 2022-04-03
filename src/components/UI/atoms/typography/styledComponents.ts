@@ -13,7 +13,7 @@ export const H3 = styled.h3`
 `;
 
 export const SmallText = styled.span`
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 `;
 
 export const Text = styled.span`

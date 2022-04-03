@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { H3 } from 'src/components/UI/atoms/typography/styledComponents';
-import { Card } from 'src/components/UI/molecules/ProductList/styledComponents';
+import { Card } from 'src/components/UI/organisms/ProductList/styledComponents';
 
 import { AddNewCard, ListWrapper } from './styledComponents';
 

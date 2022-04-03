@@ -6,8 +6,8 @@ import { setCurrentProduct } from 'src/store';
 import { CardList } from 'src/components/templates/CardList';
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H2 } from 'src/components/UI/atoms/typography/styledComponents';
-import { ProductList } from 'src/components/UI/molecules/ProductList';
-import { ProductAddForm } from 'src/components/UI/organisms/ProductAddForm';
+import { ProductAddForm } from 'src/components/UI/molecules/ProductAddForm';
+import { ProductList } from 'src/components/UI/organisms/ProductList';
 
 import { MainPageWrapper } from './styledComponents';
 

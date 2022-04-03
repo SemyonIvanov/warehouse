@@ -1,10 +1,10 @@
 import { FC, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as Delete } from 'src/assets/delete.svg';
 import { ReactComponent as Edit } from 'src/assets/edit.svg';
 
-import { RootState } from 'src/store';
+import { editProduct, RootState } from 'src/store';
 
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
@@ -21,6 +21,8 @@ import {
 } from './styledComponents';
 
 export const ProductCard: FC = () => {
+  const dispatch = useDispatch();
+
   const currentProduct = useSelector((state: RootState) => state.reducer.currentProduct);
 
   const [isEdit, setIsEdit] = useState(false);
@@ -30,7 +32,15 @@ export const ProductCard: FC = () => {
     return (
       <>
         <ProductEditForm />
-        <ModalButton text="Сохранить" onClick={() => setIsEdit(false)} />
+        <ModalButton
+          text="Сохранить"
+          onClick={() => {
+            if (currentProduct) {
+              dispatch(editProduct({ product: currentProduct }));
+            }
+            setIsEdit(false);
+          }}
+        />
       </>
     );
   }
