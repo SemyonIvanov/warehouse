@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(100%/ (3 + 1) + 0.1%, (250px - 100vw) * 1000, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(33% - 20px), 300px));
   gap: 10px;
 `;
 

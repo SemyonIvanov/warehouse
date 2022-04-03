@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as AddNew } from 'src/assets/AddNew.svg';
-import { RootState } from 'src/store';
-import { addProduct } from 'src/store/slice';
+
+import { RootState, addProduct } from 'src/store';
 
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
 import { ProductEditForm } from 'src/components/UI/molecules/ProductEditForm';

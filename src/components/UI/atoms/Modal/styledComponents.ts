@@ -16,9 +16,9 @@ export const ModalAway = styled.div`
 export const ModalWrapper = styled.div`
   position: relative;
   padding: 30px 30px 0 30px;
-  min-width: 800px;
-  min-height: calc(100% - 40px);
-  max-height: calc(100% - 40px);
+  min-width: ${({ fullHeight }: { fullHeight?: boolean }) => (fullHeight ? '800px' : 'auto')};
+  min-height: ${({ fullHeight }: { fullHeight?: boolean }) => (fullHeight ? 'calc(100% - 40px)' : 'auto')};
+  max-height: ${({ fullHeight }: { fullHeight?: boolean }) => (fullHeight ? 'calc(100% - 40px)' : 'auto')};
   margin: 20px 0;
   display: flex;
   flex-direction: column;

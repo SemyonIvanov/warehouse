@@ -5,9 +5,8 @@ import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { mockWarehouses } from 'src/mockData';
-import { RootState } from 'src/store';
-import { setCurrentProduct } from 'src/store/slice';
+
+import { RootState, setCurrentProduct } from 'src/store';
 
 import { Button } from 'src/components/UI/atoms/Button';
 import { Input } from 'src/components/UI/atoms/Input';
@@ -22,6 +21,7 @@ export const WarehouseDistribution: FC = () => {
   const dispatch = useDispatch();
 
   const currentProduct = useSelector((state: RootState) => state.reducer.currentProduct);
+  const warehouses = useSelector((state: RootState) => state.reducer.warehouses);
 
   return (
     currentProduct && (
@@ -51,7 +51,7 @@ export const WarehouseDistribution: FC = () => {
                     value={warehouse.name}
                     label="Склад"
                     onChange={(e: SelectChangeEvent) => {
-                      const selectWarehouse = mockWarehouses.find((el) => el.name === e.target.value);
+                      const selectWarehouse = warehouses.find((el) => el.name === e.target.value);
                       if (selectWarehouse) {
                         if (!currentProduct.warehouses.find((el) => el.id === selectWarehouse.id)) {
                           dispatch(
@@ -71,9 +71,9 @@ export const WarehouseDistribution: FC = () => {
                       }
                     }}
                   >
-                    {mockWarehouses.map((mockWarehouse) => (
-                      <MenuItem key={mockWarehouse.id} value={mockWarehouse.name}>
-                        {mockWarehouse.name}
+                    {warehouses.map((warehouseItem) => (
+                      <MenuItem key={warehouseItem.id} value={warehouseItem.name}>
+                        {warehouseItem.name}
                       </MenuItem>
                     ))}
                   </Select>
@@ -107,7 +107,7 @@ export const WarehouseDistribution: FC = () => {
                   label="Склад"
                   value=""
                   onChange={(e) => {
-                    const selectWarehouse = mockWarehouses.find((el) => el.name === e.target.value);
+                    const selectWarehouse = warehouses.find((el) => el.name === e.target.value);
                     if (selectWarehouse) {
                       dispatch(
                         setCurrentProduct({
@@ -120,9 +120,9 @@ export const WarehouseDistribution: FC = () => {
                     }
                   }}
                 >
-                  {mockWarehouses.map((mockWarehouse) => (
-                    <MenuItem key={mockWarehouse.id} value={mockWarehouse.name}>
-                      {mockWarehouse.name}
+                  {warehouses.map((warehouse) => (
+                    <MenuItem key={warehouse.id} value={warehouse.name}>
+                      {warehouse.name}
                     </MenuItem>
                   ))}
                 </Select>

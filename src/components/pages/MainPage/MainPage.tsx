@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { setCurrentProduct } from 'src/store/slice';
+import { setCurrentProduct } from 'src/store';
 
+import { CardList } from 'src/components/templates/CardList';
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H2 } from 'src/components/UI/atoms/typography/styledComponents';
 import { ProductList } from 'src/components/UI/molecules/ProductList';
-import { CardList } from 'src/components/UI/organisms/CardList';
 import { ProductAddForm } from 'src/components/UI/organisms/ProductAddForm';
 
 import { MainPageWrapper } from './styledComponents';
@@ -38,6 +38,7 @@ export const MainPage: FC = () => {
         <ProductList />
       </CardList>
       <Modal
+        fullHeight
         isOpen={isOpenModal}
         onClose={() => {
           dispatch(setCurrentProduct({ product: null }));

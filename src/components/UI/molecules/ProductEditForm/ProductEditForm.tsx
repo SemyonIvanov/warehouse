@@ -1,8 +1,7 @@
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { RootState } from 'src/store';
-import { setCurrentProduct } from 'src/store/slice';
+import { RootState, setCurrentProduct } from 'src/store';
 
 import { Input } from 'src/components/UI/atoms/Input';
 import { MediumText } from 'src/components/UI/atoms/typography/styledComponents';

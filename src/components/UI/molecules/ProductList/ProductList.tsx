@@ -1,12 +1,12 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { ReactComponent as ProductImg } from 'src/assets/ad_product_icon_155850.svg';
-import { RootState } from 'src/store';
-import { setCurrentProduct } from 'src/store/slice';
+
+import { RootState, setCurrentProduct, setIsOpenProductCardModal } from 'src/store';
 
 import { Modal } from 'src/components/UI/atoms/Modal';
-import { H3 } from 'src/components/UI/atoms/typography/styledComponents';
+import { H3, Text } from 'src/components/UI/atoms/typography/styledComponents';
 import { ProductCard } from 'src/components/UI/organisms/ProductCard';
 
 import { Card } from './styledComponents';
@@ -15,8 +15,7 @@ export const ProductList: FC = () => {
   const dispatch = useDispatch();
 
   const products = useSelector((state: RootState) => state.reducer.products);
-
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const isOpenProductCardModal = useSelector((state: RootState) => state.reducer.isOpenProductCardModal);
 
   return (
     <>
@@ -25,18 +24,20 @@ export const ProductList: FC = () => {
           key={product.id}
           onClick={() => {
             dispatch(setCurrentProduct({ product }));
-            setIsOpenModal(true);
+            dispatch(setIsOpenProductCardModal(true));
           }}
         >
           <H3>{product.name}</H3>
-          <ProductImg width="300px" />
+          <ProductImg width="250px" />
+          <Text>{product.amount} шт</Text>
         </Card>
       ))}
       <Modal
-        isOpen={isOpenModal}
+        fullHeight
+        isOpen={isOpenProductCardModal}
         onClose={() => {
           dispatch(setCurrentProduct({ product: null }));
-          setIsOpenModal(false);
+          dispatch(setIsOpenProductCardModal(false));
         }}
       >
         <ProductCard />
