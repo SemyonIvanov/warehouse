@@ -15,9 +15,9 @@ import {
   Delete,
   DistributionWrapper,
   SelectWrapper,
-} from 'src/components/UI/molecules/WarehouseDistribution/styledComponents';
+} from 'src/components/UI/molecules/DistributionProductInWarehouses/styledComponents';
 
-export const WarehouseDistribution: FC = () => {
+export const DistributionProductInWarehouses: FC = () => {
   const dispatch = useDispatch();
 
   const currentProduct = useSelector((state: RootState) => state.reducer.currentProduct);

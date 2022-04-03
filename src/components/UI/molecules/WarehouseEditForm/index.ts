@@ -1,0 +1,1 @@
+export { WarehouseEditForm } from './WarehouseEditForm';

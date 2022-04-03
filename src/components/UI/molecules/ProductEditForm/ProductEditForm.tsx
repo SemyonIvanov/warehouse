@@ -5,7 +5,7 @@ import { RootState, setCurrentProduct } from 'src/store';
 
 import { Input } from 'src/components/UI/atoms/Input';
 import { MediumText } from 'src/components/UI/atoms/typography/styledComponents';
-import { WarehouseDistribution } from 'src/components/UI/molecules/WarehouseDistribution';
+import { DistributionProductInWarehouses } from 'src/components/UI/molecules/DistributionProductInWarehouses';
 
 import { FormWrapper, UndistributedProduction } from './styledComponents';
 
@@ -27,7 +27,7 @@ export const ProductEditForm: FC = () => {
           initialValue={currentProduct.amount}
           setInitialValue={(value) => dispatch(setCurrentProduct({ product: { ...currentProduct, amount: value } }))}
         />
-        <WarehouseDistribution />
+        <DistributionProductInWarehouses />
         <MediumText>
           Нераспределенная продукция:{' '}
           <UndistributedProduction isNegative={currentProduct.undistributedProduction < 0}>
