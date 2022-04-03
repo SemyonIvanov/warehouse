@@ -1,104 +1,135 @@
-import { Dispatch, FC, Fragment, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Product } from 'src/@types/products';
 import { mockWarehouses } from 'src/mockData';
 
 import { Button } from 'src/components/UI/atoms/Button';
 import { Input } from 'src/components/UI/atoms/Input';
 import { MediumText, Text } from 'src/components/UI/atoms/typography/styledComponents';
-import { SelectWrapper } from 'src/components/UI/molecules/WarehouseDistribution/styledComponents';
+import {
+  Delete,
+  DistributionWrapper,
+  SelectWrapper,
+} from 'src/components/UI/molecules/WarehouseDistribution/styledComponents';
 
 interface WarehouseDistributionProps {
-  newProduct: Product;
-  setNewProduct: Dispatch<SetStateAction<Product>>;
+  product: Product;
+  setProduct: Dispatch<SetStateAction<Product>>;
+  undistributedProduction: number;
 }
 
-export const WarehouseDistribution: FC<WarehouseDistributionProps> = ({ newProduct, setNewProduct }) => (
-  <SelectWrapper>
-    {+newProduct.amount ? (
+export const WarehouseDistribution: FC<WarehouseDistributionProps> = ({
+  product,
+  setProduct,
+  undistributedProduction,
+}) => (
+  <DistributionWrapper>
+    {+product.amount ? (
       <>
         <MediumText>Распределение по складам:</MediumText>
-        {newProduct.warehouses.map((warehouse) => (
-          <Fragment key={Math.random()}>
-            <Text>Выберете склад</Text>
-            <select
-              key={warehouse.id}
-              value={warehouse.id}
-              onChange={(e) => {
-                const selectWarehouse = mockWarehouses.find(
-                  (el) => el.id === +e.target.options[e.target.options.selectedIndex].value,
-                );
-                if (selectWarehouse) {
-                  if (!newProduct.warehouses.find((el) => el.id === selectWarehouse.id)) {
-                    setNewProduct((prev) => ({
-                      ...prev,
-                      warehouses: prev.warehouses.map((el) => {
-                        if (el.id === warehouse.id) {
-                          return { ...selectWarehouse, amount: '0' };
-                        }
-                        return el;
-                      }),
-                    }));
-                  }
-                }
+        {product.warehouses.map((warehouse) => (
+          <SelectWrapper key={Math.random()}>
+            <Delete
+              onClick={() => {
+                setProduct((prev) => ({
+                  ...prev,
+                  warehouses: prev.warehouses.filter((el) => el.id !== warehouse.id),
+                }));
               }}
-            >
-              {mockWarehouses.map((mockWarehouse) => (
-                <option key={mockWarehouse.id} value={mockWarehouse.id}>
-                  {mockWarehouse.name}
-                </option>
-              ))}
-            </select>
+            />
+            <FormControl fullWidth>
+              <InputLabel id="warehouses-label">Склад</InputLabel>
+              <Select
+                labelId="warehouses-label"
+                id="warehouse-select"
+                value={warehouse.name}
+                label="Склад"
+                onChange={(e: SelectChangeEvent) => {
+                  const selectWarehouse = mockWarehouses.find((el) => el.name === e.target.value);
+                  if (selectWarehouse) {
+                    if (!product.warehouses.find((el) => el.id === selectWarehouse.id)) {
+                      setProduct((prev) => ({
+                        ...prev,
+                        warehouses: prev.warehouses.map((el) => {
+                          if (el.id === warehouse.id) {
+                            return { ...selectWarehouse, amount: '' };
+                          }
+                          return el;
+                        }),
+                      }));
+                    }
+                  }
+                }}
+              >
+                {mockWarehouses.map((mockWarehouse) => (
+                  <MenuItem key={mockWarehouse.id} value={mockWarehouse.name}>
+                    {mockWarehouse.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             {!!warehouse.name && (
               <Input
                 label="Количество"
                 type="number"
                 initialValue={warehouse.amount}
                 setInitialValue={(value) =>
-                  setNewProduct((prev) => ({
+                  setProduct((prev) => ({
                     ...prev,
                     warehouses: prev.warehouses.map((el) => (el.id === warehouse.id ? { ...el, amount: value } : el)),
                   }))
                 }
               />
             )}
-          </Fragment>
+          </SelectWrapper>
         ))}
-        {!newProduct.warehouses.length && (
-          <select
-            onChange={(e) => {
-              const selectWarehouse = mockWarehouses.find(
-                (el) => el.id === +e.target.options[e.target.options.selectedIndex].value,
-              );
-              if (selectWarehouse) {
-                setNewProduct((prev) => ({
+        {!product.warehouses.length && (
+          <FormControl fullWidth>
+            <InputLabel id="warehouses-label">Склад</InputLabel>
+            <Select
+              labelId="warehouses-label"
+              id="warehouse-select"
+              label="Склад"
+              value=""
+              onChange={(e) => {
+                const selectWarehouse = mockWarehouses.find((el) => el.name === e.target.value);
+                if (selectWarehouse) {
+                  setProduct((prev) => ({
+                    ...prev,
+                    warehouses: [...prev.warehouses, { ...selectWarehouse, amount: '' }],
+                  }));
+                }
+              }}
+            >
+              {mockWarehouses.map((mockWarehouse) => (
+                <MenuItem key={mockWarehouse.id} value={mockWarehouse.name}>
+                  {mockWarehouse.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+        {!!product.warehouses.length && (
+          <Button
+            text="добавить склад"
+            disabled={!!product.warehouses.find((el) => !+el.amount) || undistributedProduction <= 0}
+            onClick={() => {
+              if (!product.warehouses.find((el) => !+el.amount) && undistributedProduction > 0) {
+                setProduct((prev) => ({
                   ...prev,
-                  warehouses: [...prev.warehouses, { ...selectWarehouse, amount: '0' }],
+                  warehouses: [...prev.warehouses, { id: Math.random(), name: '', amount: '' }],
                 }));
               }
             }}
-          >
-            {mockWarehouses.map((mockWarehouse) => (
-              <option key={mockWarehouse.id} value={mockWarehouse.id}>
-                {mockWarehouse.name}
-              </option>
-            ))}
-          </select>
-        )}
-        {!!newProduct.warehouses.length && (
-          <Button
-            text="добавить склад"
-            onClick={() =>
-              setNewProduct((prev) => ({
-                ...prev,
-                warehouses: [...prev.warehouses, { id: Math.random(), name: '', amount: '0' }],
-              }))
-            }
           />
         )}
       </>
     ) : (
-      <span>Введите количество продукции для распределения по складам</span>
+      <Text>Для распределения по складам необходимо указать количество продукции</Text>
     )}
-  </SelectWrapper>
+  </DistributionWrapper>
 );

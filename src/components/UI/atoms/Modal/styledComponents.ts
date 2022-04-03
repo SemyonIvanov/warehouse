@@ -15,28 +15,30 @@ export const ModalAway = styled.div`
 
 export const ModalWrapper = styled.div`
   position: relative;
-  padding: 30px;
-  margin: 20px 0;
+  padding: 30px 30px 0 30px;
   min-width: 800px;
   min-height: calc(100% - 40px);
-  overflow: scroll;
+  max-height: calc(100% - 40px);
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
   background-color: white;
   border: 2px solid black;
   border-radius: 10px;
   z-index: 3;
-  &::-webkit-scrollbar {
-    width: 0.5em;
-    height: 0.5em;
+  ::-webkit-scrollbar {
+    width: 4px;
+    background: transparent;
   }
 
-  &::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+  ::-webkit-scrollbar-thumb {
+    background: black;
+    border-radius: 27px;
   }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey;
+  ::-webkit-scrollbar-track {
+    margin-top: 3px;
+    margin-bottom: 3px;
   }
 `;
 

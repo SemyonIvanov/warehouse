@@ -1,31 +1,37 @@
 import { FC, useState } from 'react';
 
-import { CommonInput, ErrorText, InputLabel } from 'src/components/UI/atoms/Input/styledComponents';
+import { TextField } from '@mui/material';
 
 interface InputProps {
   label?: string;
   error?: string;
-  type: string;
   initialValue: string;
   setInitialValue: (value: string) => void;
 }
 
-export const Input: FC<InputProps> = ({ label, error, type, initialValue, setInitialValue }) => {
+export const Input: FC<InputProps> = ({ label, error, initialValue, setInitialValue }) => {
   const [value, setValue] = useState(initialValue);
+  const [errorText, setErrorText] = useState(error);
 
   return (
-    <InputLabel>
-      {label}
-      <CommonInput
-        type={type}
-        value={value}
-        onChange={({ target }) => {
-          setValue(target.value);
-        }}
-        onBlur={() => setInitialValue(value)}
-        onKeyPress={(e) => e.key === 'Enter' && setInitialValue(value)}
-      />
-      <ErrorText>{error}</ErrorText>
-    </InputLabel>
+    <TextField
+      error={!!errorText}
+      helperText={errorText}
+      fullWidth
+      label={label}
+      value={value}
+      onChange={({ target }) => {
+        setValue(target.value);
+      }}
+      onBlur={() => {
+        if (value) {
+          setInitialValue(value);
+          setErrorText('');
+        } else {
+          setErrorText(`Введите ${label}`);
+        }
+      }}
+      onKeyPress={(e) => e.key === 'Enter' && setInitialValue(value)}
+    />
   );
 };

@@ -1,15 +1,16 @@
 import { FC } from 'react';
 
-import { BtnAdd } from 'src/components/UI/atoms/Button/styledComponents';
+import { Btn } from './styledComponents';
 
 interface ButtonProps {
   text?: string;
+  disabled?: boolean;
   onClick: () => void;
 }
 
-export const Button: FC<ButtonProps> = ({ text, onClick, children }) => (
-  <BtnAdd type="button" onClick={onClick}>
+export const Button: FC<ButtonProps> = ({ text, disabled, onClick, children }) => (
+  <Btn type="button" onClick={onClick} disabled={disabled}>
     {text}
     {children}
-  </BtnAdd>
+  </Btn>
 );

@@ -4,11 +4,8 @@ import { Product } from 'src/@types/products';
 import { ReactComponent as ProductImg } from 'src/assets/ad_product_icon_155850.svg';
 import { ReactComponent as AddNew } from 'src/assets/AddNew.svg';
 
-import { Button } from 'src/components/UI/atoms/Button';
-import { Input } from 'src/components/UI/atoms/Input';
-import { MediumText } from 'src/components/UI/atoms/typography/styledComponents';
-import { WarehouseDistribution } from 'src/components/UI/molecules/WarehouseDistribution';
-import { FormWrapper } from 'src/components/UI/organisms/ProductAddForm/styledComponents';
+import { ModalButton } from 'src/components/UI/atoms/ModalButton';
+import { ProductEditForm } from 'src/components/UI/molecules/ProductEditForm';
 
 interface ProductAddFormProps {
   setProducts: Dispatch<SetStateAction<Product[]>>;
@@ -36,22 +33,9 @@ export const ProductAddForm: FC<ProductAddFormProps> = ({ setProducts, onClose }
   }, [newProduct.amount]);
 
   return (
-    <FormWrapper>
-      <Input
-        label="Наименование"
-        type="text"
-        initialValue={newProduct.name}
-        setInitialValue={(value) => setNewProduct((prev) => ({ ...prev, name: value }))}
-      />
-      <Input
-        label="Количество"
-        type="number"
-        initialValue={newProduct.amount}
-        setInitialValue={(value) => setNewProduct((prev) => ({ ...prev, amount: value }))}
-      />
-      <WarehouseDistribution newProduct={newProduct} setNewProduct={setNewProduct} />
-      <MediumText>Нераспределенная продукция: {undistributedProduction}</MediumText>
-      <Button
+    <>
+      <ProductEditForm product={newProduct} setProduct={setNewProduct} />
+      <ModalButton
         text="Добавить продукцию"
         onClick={() => {
           if (newProduct.name && +newProduct.amount && undistributedProduction >= 0) {
@@ -68,7 +52,7 @@ export const ProductAddForm: FC<ProductAddFormProps> = ({ setProducts, onClose }
         }}
       >
         <AddNew width="20px" />
-      </Button>
-    </FormWrapper>
+      </ModalButton>
+    </>
   );
 };

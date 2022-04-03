@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const BtnAdd = styled.button`
+export const Btn = styled.button`
   padding: 10px;
   display: flex;
   align-items: center;
@@ -9,12 +9,19 @@ export const BtnAdd = styled.button`
   align-self: center;
   background: none;
   border: 1px solid black;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   box-shadow: 1px 1px black;
+  background: white;
+
   :active {
     box-shadow: 0 0 black;
-    margin-bottom: -1px;
-    margin-right: -1px;
+    transform: translateY(1px) translateX(1px);
+  }
+
+  :disabled {
+    box-shadow: none;
+    border: 1px solid gray;
+    cursor: not-allowed;
   }
 `;
