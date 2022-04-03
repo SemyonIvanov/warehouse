@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductCardWrapper = styled.div`
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;

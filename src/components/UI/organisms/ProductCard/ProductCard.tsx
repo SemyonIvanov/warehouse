@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { Product } from 'src/@types/products';
 import { ReactComponent as Edit } from 'src/assets/edit.svg';
+import { RootState } from 'src/store';
 
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
 import { LargeText, Text } from 'src/components/UI/atoms/typography/styledComponents';
@@ -9,42 +10,41 @@ import { ProductEditForm } from 'src/components/UI/molecules/ProductEditForm';
 
 import { ProductCardWrapper, ProductWarehouse, WarehousesWrapper } from './styledComponents';
 
-interface ProductCardProps {
-  initProduct: Product;
-}
+export const ProductCard: FC = () => {
+  const currentProduct = useSelector((state: RootState) => state.reducer.currentProduct);
 
-export const ProductCard: FC<ProductCardProps> = ({ initProduct }) => {
   const [isEdit, setIsEdit] = useState(false);
-  const [product, setProduct] = useState(initProduct);
 
   if (isEdit) {
     return (
       <>
-        <ProductEditForm product={product} setProduct={setProduct} />
+        <ProductEditForm />
         <ModalButton text="Сохранить" onClick={() => setIsEdit(false)} />
       </>
     );
   }
   return (
-    <>
-      <ProductCardWrapper>
-        <LargeText>{product.name}</LargeText>
-        <Text>Общее количество: {product.amount} шт</Text>
-        <WarehousesWrapper>
-          <Text>Скады, на которых храниться продукция</Text>
-          {product?.warehouses?.map?.((warehouse) => (
-            <ProductWarehouse>
-              <Text key={warehouse.id}>
-                {warehouse.name} - {warehouse.amount} шт
-              </Text>
-            </ProductWarehouse>
-          ))}
-        </WarehousesWrapper>
-        <Text>Незарезервированная продукция: {product?.undistributedProduction || 0} шт</Text>
-      </ProductCardWrapper>
-      <ModalButton text="Редактировать" onClick={() => setIsEdit(true)}>
-        <Edit width="20px" />
-      </ModalButton>
-    </>
+    currentProduct && (
+      <>
+        <ProductCardWrapper>
+          <LargeText>{currentProduct?.name}</LargeText>
+          <Text>Общее количество: {currentProduct?.amount || 0} шт</Text>
+          <WarehousesWrapper>
+            <Text>Скады, на которых храниться продукция</Text>
+            {currentProduct?.warehouses?.map?.((warehouse) => (
+              <ProductWarehouse key={warehouse.id}>
+                <Text>
+                  {warehouse.name} - {warehouse.amount} шт
+                </Text>
+              </ProductWarehouse>
+            ))}
+          </WarehousesWrapper>
+          <Text>Незарезервированная продукция: {currentProduct?.undistributedProduction || 0} шт</Text>
+        </ProductCardWrapper>
+        <ModalButton text="Редактировать" onClick={() => setIsEdit(true)}>
+          <Edit width="20px" />
+        </ModalButton>
+      </>
+    )
   );
 };

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { Product } from 'src/@types/products';
-import { mockProducts } from 'src/mockData';
+import { setCurrentProduct } from 'src/store/slice';
 
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H2 } from 'src/components/UI/atoms/typography/styledComponents';
@@ -12,17 +12,39 @@ import { ProductAddForm } from 'src/components/UI/organisms/ProductAddForm';
 import { MainPageWrapper } from './styledComponents';
 
 export const MainPage: FC = () => {
-  const [products, setProducts] = useState<Product[]>(mockProducts);
+  const dispatch = useDispatch();
+
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const openNewProductCard = () => {
+    dispatch(
+      setCurrentProduct({
+        product: {
+          id: Math.random(),
+          name: '',
+          amount: '',
+          warehouses: [],
+          undistributedProduction: 0,
+        },
+      }),
+    );
+    setIsOpenModal(true);
+  };
 
   return (
     <MainPageWrapper>
       <H2>Список продукции:</H2>
-      <CardList setOpen={setIsOpenModal}>
-        <ProductList list={products} />
+      <CardList setOpen={openNewProductCard}>
+        <ProductList />
       </CardList>
-      <Modal isOpen={isOpenModal} onClose={() => setIsOpenModal(false)}>
-        <ProductAddForm setProducts={setProducts} onClose={() => setIsOpenModal(false)} />
+      <Modal
+        isOpen={isOpenModal}
+        onClose={() => {
+          dispatch(setCurrentProduct({ product: null }));
+          setIsOpenModal(false);
+        }}
+      >
+        <ProductAddForm onClose={() => setIsOpenModal(false)} />
       </Modal>
     </MainPageWrapper>
   );

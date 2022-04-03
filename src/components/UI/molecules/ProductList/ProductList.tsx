@@ -1,6 +1,9 @@
 import { FC, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Product } from 'src/@types/products';
+import { ReactComponent as ProductImg } from 'src/assets/ad_product_icon_155850.svg';
+import { RootState } from 'src/store';
+import { setCurrentProduct } from 'src/store/slice';
 
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H3 } from 'src/components/UI/atoms/typography/styledComponents';
@@ -8,39 +11,36 @@ import { ProductCard } from 'src/components/UI/organisms/ProductCard';
 
 import { Card } from './styledComponents';
 
-interface CardListProps {
-  list: Product[];
-}
+export const ProductList: FC = () => {
+  const dispatch = useDispatch();
 
-export const ProductList: FC<CardListProps> = ({ list }) => {
+  const products = useSelector((state: RootState) => state.reducer.products);
+
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [selectProduct, setSelectProduct] = useState<Product | null>(null);
 
   return (
     <>
-      {list.map((el) => (
+      {products.map((product) => (
         <Card
-          key={el.id}
+          key={product.id}
           onClick={() => {
-            setSelectProduct(el);
+            dispatch(setCurrentProduct({ product }));
             setIsOpenModal(true);
           }}
         >
-          <H3>{el.name}</H3>
-          <el.picture width="300px" />
+          <H3>{product.name}</H3>
+          <ProductImg width="300px" />
         </Card>
       ))}
-      {selectProduct && (
-        <Modal
-          isOpen={isOpenModal}
-          onClose={() => {
-            setSelectProduct(null);
-            setIsOpenModal(false);
-          }}
-        >
-          <ProductCard initProduct={selectProduct} />
-        </Modal>
-      )}
+      <Modal
+        isOpen={isOpenModal}
+        onClose={() => {
+          dispatch(setCurrentProduct({ product: null }));
+          setIsOpenModal(false);
+        }}
+      >
+        <ProductCard />
+      </Modal>
     </>
   );
 };
