@@ -11,6 +11,7 @@ export const WarehouseEditForm: FC = () => {
   const dispatch = useDispatch();
 
   const currentWarehouse = useSelector((state: RootState) => state.reducer.currentWarehouse);
+  const products = useSelector((state: RootState) => state.reducer.products);
 
   return (
     currentWarehouse && (
@@ -22,7 +23,7 @@ export const WarehouseEditForm: FC = () => {
             dispatch(setCurrentWarehouse({ warehouse: { ...currentWarehouse, name: value } }))
           }
         />
-        <DistributionProductsToWarehouse />
+        {!!products.length && <DistributionProductsToWarehouse />}
       </FormWrapper>
     )
   );
