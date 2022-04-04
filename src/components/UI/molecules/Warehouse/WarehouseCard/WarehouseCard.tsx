@@ -20,7 +20,7 @@ export const WarehouseCard: FC = () => {
 
   const currentProduct = useSelector((state: RootState) => state.reducer.currentWarehouse);
 
-  const isTablet = useMediaQuery(MediaQueriesSizes.tablet);
+  const isTablet = useMediaQuery(`(${MediaQueriesSizes.tablet})`);
 
   const [isOpenReDistribute, setIsOpenReDistribute] = useState(false);
   const [movedProduct, setMovedProduct] = useState<{ id: number; name: string; amount: string } | null>(null);
