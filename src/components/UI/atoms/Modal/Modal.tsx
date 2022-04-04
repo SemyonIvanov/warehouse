@@ -6,6 +6,8 @@ import { useMediaQuery } from 'src/hooks';
 
 import { BtnClose, ModalAway, ModalWrapper } from 'src/components/UI/atoms/Modal/styledComponents';
 
+import { MediaQueriesSizes } from 'src/constants/size';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -13,7 +15,7 @@ interface ModalProps {
 }
 
 export const Modal: FC<ModalProps> = ({ isOpen, onClose, fullHeight, children }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isTablet = useMediaQuery(`(${MediaQueriesSizes.tablet})`);
 
   useEffect(() => {
     if (isOpen) {
@@ -32,7 +34,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, fullHeight, children })
       <ModalAway>
         <ModalWrapper fullHeight={fullHeight}>{children}</ModalWrapper>
         <BtnClose type="button" onClick={onClose}>
-          <Close width="40px" fill={isMobile ? '#000' : '#fff'} />
+          <Close width="40px" fill={isTablet ? '#000' : '#fff'} />
         </BtnClose>
       </ModalAway>,
       document.body,
