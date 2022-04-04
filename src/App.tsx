@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC, useEffect } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
-function App() {
+import { GlobalStyles } from 'src/global';
+
+import { MainPage } from 'src/components/pages/MainPage';
+import { Layout } from 'src/components/templates/Layout';
+
+import { routes } from 'src/constants/routes';
+
+export const App: FC = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('/products');
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <Layout>
+        <Routes>
+          {routes.map(({ path, Page }) => (
+            <Route key={path} path={path} element={<Page />} />
+          ))}
+          <Route path="/" element={<MainPage />} />
+        </Routes>
+      </Layout>
+    </>
   );
-}
-
-export default App;
+};

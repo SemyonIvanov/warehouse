@@ -1,0 +1,1 @@
+export { ProductDeleteWarning } from './ProductDeleteWarning';

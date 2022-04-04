@@ -1,0 +1,1 @@
+export { WarehousesList } from './WarehousesList';
