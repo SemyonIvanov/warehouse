@@ -30,7 +30,7 @@ export const ActionBtn = styled.div`
   :after {
     content: '';
     position: absolute;
-    bottom: 10px;
+    bottom: 10.5px;
     height: 30px;
     width: 30px;
   }
