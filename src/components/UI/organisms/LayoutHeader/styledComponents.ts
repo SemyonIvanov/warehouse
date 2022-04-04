@@ -59,9 +59,3 @@ export const NavItem = styled(Text)`
     background-color: white;
   }
 `;
-
-export const ProfileWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
