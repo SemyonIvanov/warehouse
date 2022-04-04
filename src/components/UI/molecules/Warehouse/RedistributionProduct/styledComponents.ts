@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const RedistributionProductWrapper = styled.div`
   width: 550px;
+  @media (max-width: 600px) {
+    width: 100%;
+  }
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
