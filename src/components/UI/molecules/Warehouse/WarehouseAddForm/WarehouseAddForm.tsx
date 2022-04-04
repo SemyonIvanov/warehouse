@@ -6,7 +6,7 @@ import { ReactComponent as AddNew } from 'src/assets/AddNew.svg';
 import { addWarehouse, RootState } from 'src/store';
 
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
-import { WarehouseEditForm } from 'src/components/UI/molecules/WarehouseEditForm';
+import { WarehouseEditForm } from 'src/components/UI/molecules/Warehouse/WarehouseEditForm';
 
 interface WarehouseAddFormProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;

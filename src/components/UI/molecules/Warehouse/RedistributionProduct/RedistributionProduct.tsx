@@ -14,7 +14,7 @@ import { Text } from 'src/components/UI/atoms/typography/styledComponents';
 import {
   RedistributionProductWrapper,
   SelectWrapper,
-} from 'src/components/UI/molecules/RedistributionProduct/styledComponents';
+} from 'src/components/UI/molecules/Warehouse/RedistributionProduct/styledComponents';
 
 interface RedistributionProductProps {
   product: { id: number; name: string; amount: string } | null;
@@ -66,6 +66,7 @@ export const RedistributionProduct: FC<RedistributionProductProps> = ({ product,
             onClose();
             dispatch(redistributionProduct({ warehouse: selectedWarehouse, product, amount: amount || '0' }));
           }
+          onClose();
         }}
       />
     </>

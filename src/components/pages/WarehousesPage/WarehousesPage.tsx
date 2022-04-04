@@ -7,7 +7,7 @@ import { WarehousesPageWrapper } from 'src/components/pages/WarehousesPage/style
 import { CardList } from 'src/components/templates/CardList';
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H2 } from 'src/components/UI/atoms/typography/styledComponents';
-import { WarehouseAddForm } from 'src/components/UI/molecules/WarehouseAddForm';
+import { WarehouseAddForm } from 'src/components/UI/molecules/Warehouse/WarehouseAddForm';
 import { WarehousesList } from 'src/components/UI/organisms/WarehousesList';
 
 export const WarehousesPage: FC = () => {

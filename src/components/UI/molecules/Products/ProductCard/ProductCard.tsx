@@ -9,8 +9,8 @@ import { editProduct, RootState } from 'src/store';
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
 import { LargeText, Text } from 'src/components/UI/atoms/typography/styledComponents';
-import { ProductDeleteWarning } from 'src/components/UI/molecules/ProductDeleteWarning';
-import { ProductEditForm } from 'src/components/UI/molecules/ProductEditForm';
+import { ProductDeleteWarning } from 'src/components/UI/molecules/Products/ProductDeleteWarning';
+import { ProductEditForm } from 'src/components/UI/molecules/Products/ProductEditForm';
 
 import {
   DeleteProduct,
@@ -50,16 +50,18 @@ export const ProductCard: FC = () => {
         <ProductCardWrapper>
           <LargeText>{currentProduct?.name}</LargeText>
           <Text>Общее количество: {currentProduct?.amount || 0} шт</Text>
-          <WarehousesWrapper>
-            <Text>Скады, на которых храниться продукция</Text>
-            {currentProduct?.warehouses?.map?.((warehouse) => (
-              <ProductWarehouse key={warehouse.id}>
-                <Text>
-                  {warehouse.name} - {warehouse.amount} шт
-                </Text>
-              </ProductWarehouse>
-            ))}
-          </WarehousesWrapper>
+          {!!currentProduct?.warehouses.length && (
+            <WarehousesWrapper>
+              <Text>Скады, на которых храниться продукция</Text>
+              {currentProduct?.warehouses?.map?.((warehouse) => (
+                <ProductWarehouse key={warehouse.id}>
+                  <Text>
+                    {warehouse.name} - {warehouse.amount} шт
+                  </Text>
+                </ProductWarehouse>
+              ))}
+            </WarehousesWrapper>
+          )}
           <Text>Незарезервированная продукция: {currentProduct?.undistributedProduction || 0} шт</Text>
         </ProductCardWrapper>
         <ModalButton text="Редактировать" onClick={() => setIsEdit(true)}>

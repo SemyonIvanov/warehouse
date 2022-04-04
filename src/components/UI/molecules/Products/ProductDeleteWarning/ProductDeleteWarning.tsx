@@ -8,7 +8,7 @@ import { Text } from 'src/components/UI/atoms/typography/styledComponents';
 import {
   ButtonWrapper,
   ProductDeleteWarningWrapper,
-} from 'src/components/UI/molecules/ProductDeleteWarning/styledComponents';
+} from 'src/components/UI/molecules/Products/ProductDeleteWarning/styledComponents';
 
 interface ProductDeleteWarningProps {
   onClose: () => void;

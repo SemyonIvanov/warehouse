@@ -2,6 +2,7 @@ import { FC, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import { ReactComponent as Close } from 'src/assets/Close.svg';
+import { useMediaQuery } from 'src/hooks';
 
 import { BtnClose, ModalAway, ModalWrapper } from 'src/components/UI/atoms/Modal/styledComponents';
 
@@ -12,6 +13,8 @@ interface ModalProps {
 }
 
 export const Modal: FC<ModalProps> = ({ isOpen, onClose, fullHeight, children }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -29,7 +32,7 @@ export const Modal: FC<ModalProps> = ({ isOpen, onClose, fullHeight, children })
       <ModalAway>
         <ModalWrapper fullHeight={fullHeight}>{children}</ModalWrapper>
         <BtnClose type="button" onClick={onClose}>
-          <Close width="40px" fill="#fff" />
+          <Close width="40px" fill={isMobile ? '#000' : '#fff'} />
         </BtnClose>
       </ModalAway>,
       document.body,

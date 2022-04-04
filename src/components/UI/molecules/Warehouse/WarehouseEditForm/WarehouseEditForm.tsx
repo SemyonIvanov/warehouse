@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, setCurrentWarehouse } from 'src/store';
 
 import { Input } from 'src/components/UI/atoms/Input';
-import { DistributionProductsToWarehouse } from 'src/components/UI/molecules/DistributionProductsToWarehouse';
-import { FormWrapper } from 'src/components/UI/molecules/ProductEditForm/styledComponents';
+import { FormWrapper } from 'src/components/UI/molecules/Products/ProductEditForm/styledComponents';
+import { DistributionProductsToWarehouse } from 'src/components/UI/molecules/Warehouse/DistributionProductsToWarehouse';
 
 export const WarehouseEditForm: FC = () => {
   const dispatch = useDispatch();

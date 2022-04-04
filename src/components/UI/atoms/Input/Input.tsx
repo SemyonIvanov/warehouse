@@ -7,9 +7,10 @@ interface InputProps {
   error?: string;
   initialValue: string;
   setInitialValue: (value: string) => void;
+  isNotNegative?: boolean;
 }
 
-export const Input: FC<InputProps> = ({ label, error, initialValue, setInitialValue }) => {
+export const Input: FC<InputProps> = ({ label, error, initialValue, setInitialValue, isNotNegative }) => {
   const [value, setValue] = useState(initialValue);
   const [errorText, setErrorText] = useState(error);
 
@@ -25,8 +26,12 @@ export const Input: FC<InputProps> = ({ label, error, initialValue, setInitialVa
       }}
       onBlur={() => {
         if (value) {
-          setInitialValue(value);
-          setErrorText('');
+          if (isNotNegative && +value < 0) {
+            setErrorText('Значение должно быть больше 0');
+          } else {
+            setInitialValue(value);
+            setErrorText('');
+          }
         } else {
           setErrorText(`Введите ${label}`);
         }
