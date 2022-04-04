@@ -11,8 +11,11 @@ import { RootState, setCurrentWarehouse } from 'src/store';
 import { Button } from 'src/components/UI/atoms/Button';
 import { Input } from 'src/components/UI/atoms/Input';
 import { MediumText, Text } from 'src/components/UI/atoms/typography/styledComponents';
-import { Delete, SelectWrapper } from 'src/components/UI/molecules/DistributionProductInWarehouses/styledComponents';
-import { DistributionProductsToWarehouseWrapper } from 'src/components/UI/molecules/DistributionProductsToWarehouse/styledComponents';
+import {
+  Delete,
+  SelectWrapper,
+} from 'src/components/UI/molecules/Products/DistributionProductInWarehouses/styledComponents';
+import { DistributionProductsToWarehouseWrapper } from 'src/components/UI/molecules/Warehouse/DistributionProductsToWarehouse/styledComponents';
 
 export const DistributionProductsToWarehouse: FC = () => {
   const dispatch = useDispatch();

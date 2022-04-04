@@ -6,7 +6,7 @@ import { ReactComponent as AddNew } from 'src/assets/AddNew.svg';
 import { RootState, addProduct } from 'src/store';
 
 import { ModalButton } from 'src/components/UI/atoms/ModalButton';
-import { ProductEditForm } from 'src/components/UI/molecules/ProductEditForm';
+import { ProductEditForm } from 'src/components/UI/molecules/Products/ProductEditForm';
 
 interface ProductAddFormProps {
   onClose: () => void;

@@ -15,7 +15,7 @@ import {
   Delete,
   DistributionWrapper,
   SelectWrapper,
-} from 'src/components/UI/molecules/DistributionProductInWarehouses/styledComponents';
+} from 'src/components/UI/molecules/Products/DistributionProductInWarehouses/styledComponents';
 
 export const DistributionProductInWarehouses: FC = () => {
   const dispatch = useDispatch();
@@ -80,6 +80,7 @@ export const DistributionProductInWarehouses: FC = () => {
                 </FormControl>
                 {!!warehouse.name && (
                   <Input
+                    isNotNegative
                     label="Количество"
                     initialValue={warehouse.amount}
                     setInitialValue={(value) =>

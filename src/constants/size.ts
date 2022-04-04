@@ -1,15 +1,6 @@
 export enum MediaQueriesSizes {
-  mobile = '480px',
-  tablet = '768px',
-  laptops = '1024px',
-  desktops = '1200px',
-  large = '1980px',
-}
-
-export enum LayoutSize {
-  mobile = '480px',
-  tablet = '768px',
-  laptops = '1024px',
-  desktops = '1200px',
-  large = '1980px',
+  mobile = 'max-width: 480px',
+  tablet = 'max-width: 768px',
+  laptops = 'max-width: 1024px',
+  desktops = 'max-width: 1280px',
 }

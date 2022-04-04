@@ -7,7 +7,7 @@ import { RootState, setCurrentProduct, setIsOpenProductCardModal } from 'src/sto
 
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H3, Text } from 'src/components/UI/atoms/typography/styledComponents';
-import { ProductCard } from 'src/components/UI/molecules/ProductCard';
+import { ProductCard } from 'src/components/UI/molecules/Products/ProductCard';
 
 import { Card } from './styledComponents';
 

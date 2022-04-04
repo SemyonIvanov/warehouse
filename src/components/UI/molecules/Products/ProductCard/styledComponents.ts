@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { Text } from 'src/components/UI/atoms/typography/styledComponents';
 
+import { MediaQueriesSizes } from 'src/constants/size';
+
 export const ProductCardWrapper = styled.div`
   margin-bottom: 20px;
   display: flex;
@@ -34,6 +36,10 @@ export const DeleteProduct = styled.div`
   align-items: center;
   gap: 5px;
   cursor: pointer;
+  @media (${MediaQueriesSizes.tablet}) {
+    top: 50px;
+    right: 50px;
+  }
 `;
 
 export const DeleteProductText = styled(Text)`

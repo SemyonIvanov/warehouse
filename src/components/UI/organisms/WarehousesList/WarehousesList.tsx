@@ -7,7 +7,7 @@ import { RootState, setCurrentWarehouse, setIsOpenWarehouseCardModal } from 'src
 
 import { Modal } from 'src/components/UI/atoms/Modal';
 import { H3 } from 'src/components/UI/atoms/typography/styledComponents';
-import { WarehouseCard } from 'src/components/UI/molecules/WarehouseCard';
+import { WarehouseCard } from 'src/components/UI/molecules/Warehouse/WarehouseCard';
 import { Card } from 'src/components/UI/organisms/ProductList/styledComponents';
 
 export const WarehousesList: FC = () => {

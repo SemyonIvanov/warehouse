@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import { H1, Text } from 'src/components/UI/atoms/typography/styledComponents';
 
+import { MediaQueriesSizes } from 'src/constants/size';
+
 export const Header = styled.header`
   width: 100%;
   padding: 10px 20px 0 20px;
@@ -14,6 +16,9 @@ export const Header = styled.header`
 
 export const Logo = styled(H1)`
   font-weight: bold;
+  @media (${MediaQueriesSizes.tablet}) {
+    display: none;
+  }
 `;
 
 export const NavigationMenu = styled.nav`
@@ -31,7 +36,7 @@ export const NavigationMenu = styled.nav`
 
 export const NavItem = styled(Text)`
   position: relative;
-  padding: 5px;
+  padding: 10px;
   display: flex;
   align-items: center;
   flex: 1;
@@ -49,7 +54,7 @@ export const NavItem = styled(Text)`
     position: absolute;
     bottom: -3px;
     left: 0;
-    height: ${({ isActive }: { isActive: boolean }) => (isActive ? '3px' : '0')};
+    height: ${({ isActive }: { isActive: boolean }) => (isActive ? '4px' : '0')};
     width: 100%;
     background-color: white;
   }
